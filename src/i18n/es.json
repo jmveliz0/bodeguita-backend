@@ -1,0 +1,20 @@
+{
+	"API": {
+		"REST": {
+			"USER": {
+				"NOT_FOUND": "No se encontró usuario",
+				"INVALID_PASSWORD": "La contraseña es incorrecta",
+				"NO_PASSWORD_PROVIDED": "No se proporcionó contraseña",
+				"SUCCESS": "Operación satisfactoria",
+				"FAILED_AUTHENTICATION_TOKEN": "Falló durante autenticación con token",
+				"USER_OR_PASS_REQUIRED": "No se proporcionó Usuario o Contraseña"
+			},
+			"DATA": {
+				"NOT_FOUND": "No se encontraron los datos"
+			}
+		}
+	},
+	"Cannot read property 'findAll' of undefined": "Cannot read property 'findAll' of undefined",
+	"column \"createdAt\" does not exist": "column \"createdAt\" does not exist",
+	"Product is not defined": "Product is not defined"
+}
