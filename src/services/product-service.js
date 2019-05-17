@@ -15,11 +15,14 @@ class ProductService {
       throw Error(Messages.DATA_NOT_FOUND);
     }
     res.status(200).json({ data });
+    
   }
   async create(req, res) {
     const product = req.body;
+    product.abrev = product.name[0]
     const data = await Product.create(product);
     res.status(201).json({ data });
+    return req
   }
   async update(req, res) {
     const id = req.params.id;
