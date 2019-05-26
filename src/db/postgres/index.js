@@ -2,8 +2,13 @@ import Sequelize from 'sequelize';
 
 import UserModel from './models/bsb_user';
 import ProductModel from './models/bsb_product';
+import SequelizeMock from 'sequelize-mock' 
 
-const sequelize = new Sequelize(process.env.DB_POSTGRES, process.env.USERNAME_POSTGRES, process.env.PASSWORD_POSTGRES, {
+let sequelize = null
+let Product
+let User
+
+sequelize = new Sequelize(process.env.DB_POSTGRES, process.env.USERNAME_POSTGRES, process.env.PASSWORD_POSTGRES, {
   host: process.env.HOST_POSTGRES,
   port: process.env.PORT_POSTGRES,
   dialect: 'postgres',
@@ -15,18 +20,21 @@ const sequelize = new Sequelize(process.env.DB_POSTGRES, process.env.USERNAME_PO
     idle: 10000
   }
 });
+User = UserModel(sequelize, Sequelize);
+Product = ProductModel(sequelize, Sequelize);
+
+
 
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Connection has been established successfully.')
+    console.log('Connection has been established successfully to database.')
   })
   .catch((err) => {
     console.error('Unable to connect to the database:', err)
 })
 
-const User = UserModel(sequelize, Sequelize);
-const Product = ProductModel(sequelize, Sequelize);
+
 
 module.exports = {
   User,

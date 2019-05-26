@@ -1,52 +1,48 @@
 import '@babel/polyfill';
 import * as Messages from '../utils/message-constants';
-import { Product } from '../db/postgres/index';
+import ProductDao from '../dao/product-dao'
 
 class ProductService {
   async all(req, res) {
-    const where = req.parsedQuery;
-    const data = await Product.findAll({order: [['id','ASC']], where });
-    res.status(200).json({ data });
+    const data = await ProductDao.findAll();
+    process.env.NODE_ENV !== 'test' && res.status(200).json({ data });
+    return data
   }
   async findById(req, res) {
-    const where = { id: req.params.id };
-    const data = await Product.findOne({ where });
+    const id = req.params.id;
+    const data = await ProductDao.findOne(id);
     if (!data) {
       throw Error(Messages.DATA_NOT_FOUND);
     }
-    res.status(200).json({ data });
-    
+    process.env.NODE_ENV !== 'test' && res.status(200).json({ data });
+    return data
   }
   async create(req, res) {
     const product = req.body;
-    product.abrev = product.name[0]
-    const data = await Product.create(product);
-    res.status(201).json({ data });
-    return req
+    const data = await ProductDao.create(product);
+    process.env.NODE_ENV !== 'test' && res.status(201).json({ data: data })
+    return data 
   }
   async update(req, res) {
     const id = req.params.id;
-    const where = Object.assign(req.parsedQuery, { id });
-    const body = req.body;
-    const object = await Product.findOne({
-      where
-    });
-    if (!object) {
+    let result = await ProductDao.update(req.body,id)
+    let updateResult = result[0]
+    // console.log('Mi result is ->>',result)
+    if(updateResult === 0){
       throw Error(Messages.DATA_NOT_FOUND);
     }
-    const data = await object.update(body);
-    res.status(201).json({ data });
+    let data = await ProductDao.findOne(id)
+    process.env.NODE_ENV !== 'test' && res.status(201).json({ data });
+    return data
   }
   async deleteById(req, res) {
     const id = req.params.id;
-    const where = Object.assign(req.parsedQuery, { id });
-    const data = await Product.destroy({
-      where
-    });
-    if (!data) {
+    let result = await ProductDao.destroy(id);
+    if (result === 0) {
       throw Error(Messages.DATA_NOT_FOUND);
     }
-    res.status(200).json({ data });
+    process.env.NODE_ENV !== 'test' && res.status(200).json({ data:null });
+    return result
   }
 }
 

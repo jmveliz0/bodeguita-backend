@@ -16,5 +16,16 @@
 	},
 	"Cannot read property 'findAll' of undefined": "Cannot read property 'findAll' of undefined",
 	"column \"createdAt\" does not exist": "column \"createdAt\" does not exist",
-	"Product is not defined": "Product is not defined"
+	"Product is not defined": "Product is not defined",
+	"Cannot read property '0' of undefined": "Cannot read property '0' of undefined",
+	"_index": {
+		"Product": {
+			"create is not a function": "_index.Product.create is not a function"
+		}
+	},
+	"body is not defined": "body is not defined",
+	"data is not defined": "data is not defined",
+	"Invalid value { where": " { id: '4' } }",
+	"\"data\" is read-only": "\"data\" is read-only",
+	"Invalid value { nombre": " 'Nm' }"
 }
