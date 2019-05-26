@@ -7,6 +7,7 @@ router
   .route('/')
   .get(UserService.all)
   .post(UserService.create);
+  router.route('/:id').get(UserService.findById);
 router.route('/:id').patch(UserService.update);
 router.route('/:id').delete(UserService.deleteById);
 

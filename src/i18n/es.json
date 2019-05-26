@@ -27,5 +27,6 @@
 	"data is not defined": "data is not defined",
 	"Invalid value { where": " { id: '4' } }",
 	"\"data\" is read-only": "\"data\" is read-only",
-	"Invalid value { nombre": " 'Nm' }"
+	"Invalid value { nombre": " 'Nm' }",
+	"User is not defined": "User is not defined"
 }
