@@ -1,5 +1,3 @@
-console.log('Entrando al DAO mock de Productos')
-
 class ProductDao {
     async create(product){
         let data = Object.assign(product,{id:4}) 

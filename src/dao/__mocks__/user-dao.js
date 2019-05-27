@@ -1,5 +1,3 @@
-console.log('Entrando al DAO mock de Usuarios')
-
 class UserDao {
     async create(user){
         let data = Object.assign(user,{id:1}) 
