@@ -1,4 +1,3 @@
-import * as Messages from '../../utils/message-constants';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Sequelize from 'sequelize';
@@ -6,11 +5,11 @@ import Sequelize from 'sequelize';
 export const verifyToken = (req, res, next) => {
   const token = req.headers['x-access-token'];
   if (!token) {
-    throw Error(Messages.FAILED_AUTHENTICATION_TOKEN);
+    throw Error("Authentication failed");
   }
   jwt.verify(token, process.env.JWT_SECRET, { ignoreExpiration: false }, (err, decoded) => {
     if (err) {
-      throw Error(Messages.FAILED_AUTHENTICATION_TOKEN);
+      throw Error("Authentication failed");
     }
     req.userId = decoded.id;
     next();
@@ -43,7 +42,7 @@ export const handleError = (error, req, res, next) => {
 export const hashPassword = (req, res, next) => {
   const password = req.body.password;
   if (!password) {
-    throw Error(Messages.NO_PASSWORD_PROVIDED);
+    throw Error("No password provided");
   }
   req.body.password = bcrypt.hashSync(password, 8);
   next();
@@ -52,8 +51,6 @@ export const hashPassword = (req, res, next) => {
 export const jsonAsyncBody = (body, req, res) => {
   return {
     success: body.success || true,
-    data: body.data || null,
-    messageCode: body.message || Messages.SUCCESS,
-    message: res.__(body.message || Messages.SUCCESS)
+    data: body.data || null
   };
 };

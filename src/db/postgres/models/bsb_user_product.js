@@ -1,6 +1,7 @@
+
 module.exports = function(sequelize, DataTypes) {
     return sequelize.define(
-      'Product',
+      'UserProduct',
       {
         id: {
           type: DataTypes.BIGINT,
@@ -9,23 +10,28 @@ module.exports = function(sequelize, DataTypes) {
           autoIncrement: true,
           field: 'id'
         },
-        categoryId:{
+        userId:{
           type: DataTypes.BIGINT,
           allowNull:true,
           references: {
-            model: 'bsb_category',
+            model: 'bsb_user',
             key: 'id'
           },
-          field: 'categoryId'
+          field: 'userId'
         },
-        name: DataTypes.STRING,
-        quantity: DataTypes.INTEGER,
-        price: DataTypes.DECIMAL,
-        discount: DataTypes.DECIMAL
+        productId:{
+          type: DataTypes.BIGINT,
+          allowNull:true,
+          references: {
+            model: 'bsb_product',
+            key: 'id'
+          },
+          field: 'productId'
+        },
       },
       {
         timestamps:false,
-        tableName: 'bsb_product',
+        tableName: 'bsb_user_product',
         schema: 'public'
       }
     );

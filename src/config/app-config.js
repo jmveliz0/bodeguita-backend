@@ -5,8 +5,6 @@ import Sequelize from 'sequelize';
 import queryParams from 'express-query-params';
 import { handleError, jsonAsyncBody } from '../routes/middlewares/app-middleware';
 import mung from 'express-mung';
-import i18n from 'i18n';
-import path from 'path';
 import cookieParser from 'cookie-parser';
 import createLocaleMiddleware from 'express-locale';
 
@@ -29,16 +27,7 @@ export default (app, loadFirst) => {
       })
     );
     app.use(mung.json(jsonAsyncBody));
-    i18n.configure({
-      locales: ['en', 'es'],
-      defaultLocale: 'es',
-      cookie: 'translations',
-      directory: path.join(__dirname, '../i18n'),
-      autoReload: true,
-      objectNotation: true
-    });
     app.use(cookieParser());
-    app.use(i18n.init);
   } else {
     app.use(handleError);
   }

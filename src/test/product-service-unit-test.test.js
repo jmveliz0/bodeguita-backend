@@ -5,11 +5,11 @@ describe('Suite de pruebas para productos',()=>{
     var postRequest = {
         body: {
           id:6,
-          nombre:"Chocolate",
-          cantidad:69,
-          precio:10.99,
-          tipo:2,
-          descuento: 0.2
+          name:"Chocolate",
+          quantity:69,
+          price:10.99,
+          categoryId:2,
+          discount: 0.2
         }
     }
 
@@ -17,16 +17,17 @@ describe('Suite de pruebas para productos',()=>{
       let response = await ProductService.create(postRequest,null)
       expect(response).toEqual(expect.objectContaining({
         id: expect.any(Number),
-        nombre: expect.any(String),
-        cantidad: expect.any(Number),
-        precio: expect.any(Number),
-        tipo: expect.any(Number),
-        descuento: expect.any(Number)
+        name: expect.any(String),
+        quantity: expect.any(Number),
+        price: expect.any(Number),
+        categoryId: expect.any(Number),
+        discount: expect.any(Number)
       }))
     })
 
-    test('Listar productos -> funciona',async ()=>{
-      let response = await ProductService.all()
+    test('Listar productos -> funciona', async ()=>{
+      let resMock = {status:(code) => {return {json: ()=>{} }} }
+      let response = await ProductService.all(null,resMock)
       expect(response.length).toBeGreaterThanOrEqual(0)
     })
 
@@ -46,21 +47,21 @@ describe('Suite de pruebas para productos',()=>{
           id: 5
         },
         body:{
-            nombre: 'Lapiceros',
-            cantidad: 65,
-            precio: 12.99,
-            tipo: 5,
-            descuento: 0.8
+            name: 'Lapiceros',
+            quantity: 65,
+            price: 12.99,
+            categoryId: 5,
+            discount: 0.8
         }
       }
       let response = await ProductService.update(req,null)
       expect(response).toEqual({
         id: 5,
-        nombre: 'Lapiceros',
-        cantidad: 65,
-        precio: 12.99,
-        tipo: 5,
-        descuento: 0.8
+        name: 'Lapiceros',
+        quantity: 65,
+        price: 12.99,
+        categoryId: 5,
+        discount: 0.8
       })
     })
 

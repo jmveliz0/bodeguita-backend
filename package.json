@@ -4,7 +4,7 @@
   "description": "user product crud",
   "main": "src/app.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "start": "./node_modules/.bin/nodemon --exec babel-node src/app.js",
     "serve": "./node_modules/.bin/node dist/app.js",
     "babel": "./node_modules/.bin/babel -D -d dist/ src"
@@ -22,7 +22,9 @@
     "jest": "^24.8.0",
     "nodemon": "^1.17.3",
     "sequelize-mock": "^0.10.2",
-    "standard": "^11.0.1"
+    "standard": "^11.0.1",
+    "superagent": "^5.0.5",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

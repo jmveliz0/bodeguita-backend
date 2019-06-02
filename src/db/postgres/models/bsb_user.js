@@ -1,8 +1,7 @@
-/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define(
-    'user',
+    'User',
     {
       id: {
         type: DataTypes.BIGINT,
@@ -11,8 +10,8 @@ module.exports = function(sequelize, DataTypes) {
         autoIncrement: true,
         field: 'id'
       },
-      codigo: DataTypes.STRING,
-      clave: DataTypes.STRING
+      code: DataTypes.STRING,
+      password: DataTypes.STRING
     },
     {
       timestamps:false,

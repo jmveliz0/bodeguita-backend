@@ -3,62 +3,49 @@ class ProductDao {
         let data = Object.assign(product,{id:4}) 
         return data 
     }
+
     async findAll(){
       let data = JSON.parse(`[
         {
-            "id": "4",
-            "nombre": "Cortinas",
-            "cantidad": "69",
-            "precio": "10.99",
-            "tipo": "2",
-            "descuento": "0.2"
-        },
-        {
-            "id": "5",
-            "nombre": "Tablets 7.1'",
-            "cantidad": "69",
-            "precio": "10.99",
-            "tipo": "2",
-            "descuento": "0.2"
-        },
-        {
-            "id": "9",
-            "nombre": "Chocolate",
-            "cantidad": "69",
-            "precio": "10.99",
-            "tipo": "2",
-            "descuento": "0.2"
+            "id": "1",
+            "categoryId": 1,
+            "name": "Chocolate",
+            "quantity": "80",
+            "price": "70",
+            "discount": null
         }
-      ]`)
+    ]`)
       return data
     }
+
     async findOne(id){
       let data = null
       if(id === 4){
         data = {
           id: 4,
-          nombre: 'Cortinas',
-          cantidad: 69,
-          precio: 10.99,
-          tipo: 2,
-          descuento: 0.2
+          categoryId: 1,
+          name: "Chocolate",
+          quantity: "80",
+          price: "70",
+          discount: null
         }
-      }else if(id===5){
+      }else if(id === 5){
         data = {
           id: 5,
-          nombre: 'Lapiceros',
-          cantidad: 65,
-          precio: 12.99,
-          tipo: 5,
-          descuento: 0.8
-        }
+          name: 'Lapiceros',
+          quantity: 65,
+          price: 12.99,
+          categoryId: 5,
+          discount: 0.8
+      }
       }
       return data
     }
+
     async update(obj,id){
-      // return Object.assign(obj,{id:id})
       return [1]
     }
+
     async destroy(id){
       return 1
     }

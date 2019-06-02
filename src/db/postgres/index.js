@@ -2,13 +2,10 @@ import Sequelize from 'sequelize';
 
 import UserModel from './models/bsb_user';
 import ProductModel from './models/bsb_product';
-import SequelizeMock from 'sequelize-mock' 
+import CategoryModel from './models/bsb_category';
+import UserProductModel from './models/bsb_user_product';
 
-let sequelize = null
-let Product
-let User
-
-sequelize = new Sequelize(process.env.DB_POSTGRES, process.env.USERNAME_POSTGRES, process.env.PASSWORD_POSTGRES, {
+let sequelize = new Sequelize(process.env.DB_POSTGRES, process.env.USERNAME_POSTGRES, process.env.PASSWORD_POSTGRES, {
   host: process.env.HOST_POSTGRES,
   port: process.env.PORT_POSTGRES,
   dialect: 'postgres',
@@ -19,24 +16,32 @@ sequelize = new Sequelize(process.env.DB_POSTGRES, process.env.USERNAME_POSTGRES
     acquire: 30000,
     idle: 10000
   }
-});
-User = UserModel(sequelize, Sequelize);
-Product = ProductModel(sequelize, Sequelize);
-
-
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully to database.')
-  })
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err)
 })
 
+const closeSequelize = async () => {
+  await sequelize.close()
+}
 
+let User = UserModel(sequelize, Sequelize);
+let Product = ProductModel(sequelize, Sequelize);
+let Category = CategoryModel(sequelize, Sequelize);
+let UserProduct = UserProductModel(sequelize, Sequelize);
+
+User.hasMany(UserProduct,{
+  foreignKey: 'userId'
+})
+
+Product.hasMany(UserProduct,{
+  foreignKey: 'productId'
+})
+
+Category.hasMany(Product,{
+  foreignKey: 'categoryId'
+})
 
 module.exports = {
   User,
   Product,
+  Category,
+  UserProduct
 }

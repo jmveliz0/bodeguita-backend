@@ -17,8 +17,8 @@ class UserDao {
       let result = await User.update(obj,{where:{id}})
       return result
     }
-    async destroy(id){
-      let data = await User.destroy({where: {id}})
+    async destroy(where){
+      let data = await User.destroy(where)
       return data
     }
 }

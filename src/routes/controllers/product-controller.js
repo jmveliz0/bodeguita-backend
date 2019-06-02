@@ -3,7 +3,6 @@ import 'express-async-errors';
 import ProductService from '../../services/product-service';
 
 const router = express.Router();
-
 router
   .route('/')
   .get(ProductService.all)

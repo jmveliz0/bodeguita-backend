@@ -1,25 +1,21 @@
 import '@babel/polyfill';
-import UserDao from '../dao/user-dao'
+import UserProductDao from '../dao/user-product-dao'
 
-class UserService {
+class UserProductService {
   async all(req, res) {
-    const users = await UserDao.findAll({order: [['id','ASC']] });
+    const users = await UserProductDao.findAll({order: [['id','ASC']] });
     process.env.NODE_ENV !== 'test' && res.status(200).json({ data: users });
     return users
-    // UserDao.findAll({order: [['id','ASC']] }).then(users=>{
-    //   process.env.NODE_ENV !== 'test' && res.status(200).json({ data: users });
-    //   return users
-    // });
   }
   async create(req, res) {
     const user = req.body;
-    const data = await UserDao.create(user);
+    const data = await UserProductDao.create(user);
     process.env.NODE_ENV !== 'test' && res.status(201).json({ data });
     return data
   }
   async findById(req, res) {
     const id = req.params.id;
-    const data = await UserDao.findOne(id);
+    const data = await UserProductDao.findOne(id);
     if (!data) {
       throw Error("Data not found" );
     }
@@ -28,22 +24,23 @@ class UserService {
   }
   async update(req, res) {
     const id = req.params.id;
-    let result = await UserDao.update(req.body,id)
+    let result = await UserProductDao.update(req.body,id)
     let updateResult = result[0]
     //  ('Mi result is ->>',result)
     if(updateResult === 0){
       throw Error("Data not found" );
     }
-    let data = await UserDao.findOne(id)
+    let data = await UserProductDao.findOne(id)
     process.env.NODE_ENV !== 'test' && res.status(201).json({ data });
     return data
   }
   async deleteById(req, res) {
     const id = req.params.id;
-    const data = await UserDao.destroy({ where: {id} });
+    const where = Object.assign(req.parsedQuery, { id });
+    const data = await UserProductDao.destroy({ where });
     process.env.NODE_ENV !== 'test' && res.status(200).json({ data });
     return data
   }
 }
 
-export default new UserService();
+export default new UserProductService();
