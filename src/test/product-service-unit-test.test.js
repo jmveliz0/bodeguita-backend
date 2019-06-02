@@ -14,7 +14,8 @@ describe('Suite de pruebas para productos',()=>{
     }
 
     test('Crear un producto -> funciona',async ()=>{
-      let response = await ProductService.create(postRequest,null)
+      let resMock = {status:(code) => {return {json: ()=>{} }} }
+      let response = await ProductService.create(postRequest,resMock)
       expect(response).toEqual(expect.objectContaining({
         id: expect.any(Number),
         name: expect.any(String),
@@ -32,12 +33,13 @@ describe('Suite de pruebas para productos',()=>{
     })
 
     test('Encontrar un producto con el mismo Id que se solicito -> funciona',async ()=>{
-      let req = {
+      let reqMock = {
         params: {
           id: 4
         }
       }
-      let response = await ProductService.findById(req)
+      let resMock = {status:(code) => {return {json: ()=>{} }} }
+      let response = await ProductService.findById(reqMock,resMock)
       expect(response.id).toBe(4)
     })
 
@@ -54,7 +56,8 @@ describe('Suite de pruebas para productos',()=>{
             discount: 0.8
         }
       }
-      let response = await ProductService.update(req,null)
+      let resMock = {status:(code) => {return {json: ()=>{} }} }
+      let response = await ProductService.update(req,resMock)
       expect(response).toEqual({
         id: 5,
         name: 'Lapiceros',
@@ -71,7 +74,8 @@ describe('Suite de pruebas para productos',()=>{
           id: 6
         }
       }
-      let response = await ProductService.deleteById(req,null)
+      let resMock = {status:(code) => {return {json: ()=>{} }} }
+      let response = await ProductService.deleteById(req,resMock)
       expect(response).toBe(1)
     })
 })

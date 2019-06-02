@@ -41,5 +41,5 @@ appConfig(app, true);
 // });
 routes(app);
 appConfig(app)
-// app.listen(3000)
+if(process.env.NODE_ENV !== 'test') app.listen(3000)
 export default app;

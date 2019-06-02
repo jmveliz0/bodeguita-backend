@@ -2,44 +2,50 @@ import '@babel/polyfill';
 import UserProductDao from '../dao/user-product-dao'
 
 class UserProductService {
-  async all(req, res) {
-    const users = await UserProductDao.findAll({order: [['id','ASC']] });
-    process.env.NODE_ENV !== 'test' && res.status(200).json({ data: users });
-    return users
+  all(req, res) {
+    return UserProductDao.findAll().then(data=>{
+      res.status(200).json({ data: users });
+      return users
+    });
   }
-  async create(req, res) {
-    const user = req.body;
-    const data = await UserProductDao.create(user);
-    process.env.NODE_ENV !== 'test' && res.status(201).json({ data });
-    return data
+  create(req, res) {
+    return UserProductDao.create(req.body).then(data=>{
+      res.status(201).json({ data });
+      return data
+    });
   }
-  async findById(req, res) {
+  findById(req, res) {
     const id = req.params.id;
-    const data = await UserProductDao.findOne(id);
-    if (!data) {
-      throw Error("Data not found" );
-    }
-    process.env.NODE_ENV !== 'test' && res.status(200).json({ data });
-    return data
+    return UserProductDao.findOne(id).then(data=>{
+      if (!data) {
+        throw Error("Data not found" );
+      }
+      res.status(200).json({ data });
+      return data
+    });
   }
-  async update(req, res) {
+  update(req, res) {
     const id = req.params.id;
-    let result = await UserProductDao.update(req.body,id)
-    let updateResult = result[0]
-    //  ('Mi result is ->>',result)
-    if(updateResult === 0){
-      throw Error("Data not found" );
-    }
-    let data = await UserProductDao.findOne(id)
-    process.env.NODE_ENV !== 'test' && res.status(201).json({ data });
-    return data
+    return UserProductDao.update(req.body,id).then(result=>{
+      if(result[0] === 0){
+        throw Error("Data not found" );
+      }
+      return UserProductDao.findOne(id)
+      
+    }).then((data)=>{
+      res.status(201).json({ data });
+      return data
+    })
   }
-  async deleteById(req, res) {
+  deleteById(req, res) {
     const id = req.params.id;
-    const where = Object.assign(req.parsedQuery, { id });
-    const data = await UserProductDao.destroy({ where });
-    process.env.NODE_ENV !== 'test' && res.status(200).json({ data });
-    return data
+    return UserProductDao.destroy(id).then(result =>{
+      if (result === 0) {
+        throw Error("Data not found" );
+      }
+      res.status(200).json({ data:null });
+      return result
+    })
   }
 }
 

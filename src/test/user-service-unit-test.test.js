@@ -10,7 +10,8 @@ describe('Suite de pruebas para usuario',()=>{
                 clave:"123"
             }
         }
-      let response = await UserService.create(req,null)
+      let resMock = {status:(code) => {return {json: ()=>{} }} }
+      let response = await UserService.create(req,resMock)
       expect(response).toEqual(expect.objectContaining({
         id: expect.any(Number),
         codigo: expect.any(String),
@@ -19,7 +20,8 @@ describe('Suite de pruebas para usuario',()=>{
     })
 
     test('Listar usuario -> funciona',async ()=>{
-      let response = await UserService.all()
+      let resMock = {status:(code) => {return {json: ()=>{} }} }
+      let response = await UserService.all(null,resMock)
       expect(response.length).toBeGreaterThanOrEqual(0)
     })
 
@@ -29,7 +31,8 @@ describe('Suite de pruebas para usuario',()=>{
           id: 2
         }
       }
-      let response = await UserService.findById(req,null)
+      let resMock = {status:(code) => {return {json: ()=>{} }} }
+      let response = await UserService.findById(req,resMock)
       expect(response.id).toBe(2)
     })
 
