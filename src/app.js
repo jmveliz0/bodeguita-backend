@@ -41,5 +41,9 @@ appConfig(app, true);
 // });
 routes(app);
 appConfig(app)
-if(process.env.NODE_ENV !== 'test') app.listen(3000)
+if(process.env.NODE_ENV !== 'test') {
+    let port = 8000
+    app.listen(port)
+    console.log("Listening to port " + port)
+}
 export default app;
