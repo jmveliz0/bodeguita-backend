@@ -18,10 +18,12 @@ module.exports = function(sequelize, DataTypes) {
           },
           field: 'categoryId'
         },
+        type:DataTypes.STRING,
+        nationality:DataTypes.STRING,
         name: DataTypes.STRING,
         quantity: DataTypes.INTEGER,
         price: DataTypes.DECIMAL,
-        discount: DataTypes.DECIMAL
+        discount: DataTypes.BOOLEAN
       },
       {
         timestamps:false,

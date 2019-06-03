@@ -9,7 +9,9 @@ describe('Suite de pruebas para productos',()=>{
           quantity:69,
           price:10.99,
           categoryId:2,
-          discount: 0.2
+          discount: true,
+          nationality:'Peruana',
+          type:'Golosinas'
         }
     }
 
@@ -22,7 +24,9 @@ describe('Suite de pruebas para productos',()=>{
         quantity: expect.any(Number),
         price: expect.any(Number),
         categoryId: expect.any(Number),
-        discount: expect.any(Number)
+        discount: expect.any(Boolean),
+        type: expect.any(String),
+        nationality: expect.any(String)
       }))
     })
 
@@ -53,18 +57,22 @@ describe('Suite de pruebas para productos',()=>{
             quantity: 65,
             price: 12.99,
             categoryId: 5,
-            discount: 0.8
+            discount: true,
+            nationality: 'Peruana',
+            type:'Utiles escolares'
+          }
         }
-      }
-      let resMock = {status:(code) => {return {json: ()=>{} }} }
-      let response = await ProductService.update(req,resMock)
-      expect(response).toEqual({
-        id: 5,
-        name: 'Lapiceros',
-        quantity: 65,
-        price: 12.99,
-        categoryId: 5,
-        discount: 0.8
+        let resMock = {status:(code) => {return {json: ()=>{} }} }
+        let response = await ProductService.update(req,resMock)
+        expect(response).toEqual({
+          id: 5,
+          name: 'Lapiceros',
+          quantity: 65,
+          price: 12.99,
+          categoryId: 5,
+          discount: 0.8,
+          nationality: 'Peruana',
+          type:'Utiles escolares'
       })
     })
 

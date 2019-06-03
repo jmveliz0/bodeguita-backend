@@ -12,7 +12,9 @@ class ProductDao {
             "name": "Chocolate",
             "quantity": "80",
             "price": "70",
-            "discount": null
+            "discount": true,
+            "nationality": "Extranjero",
+            "type": "Golosinas"
         }
     ]`)
       return data
@@ -26,7 +28,9 @@ class ProductDao {
           categoryId: 1,
           name: "Chocolate",
           quantity: "80",
+          nationality:'Extranjero',
           price: "70",
+          type:'Golosinas',
           discount: null
         }
       }else if(id === 5){
@@ -36,7 +40,9 @@ class ProductDao {
           quantity: 65,
           price: 12.99,
           categoryId: 5,
-          discount: 0.8
+          discount: 0.8,
+          nationality: 'Peruana',
+          type:'Utiles escolares'
       }
       }
       return data
