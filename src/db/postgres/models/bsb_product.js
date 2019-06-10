@@ -9,15 +9,6 @@ module.exports = function(sequelize, DataTypes) {
           autoIncrement: true,
           field: 'id'
         },
-        categoryId:{
-          type: DataTypes.BIGINT,
-          allowNull:true,
-          references: {
-            model: 'bsb_category',
-            key: 'id'
-          },
-          field: 'categoryId'
-        },
         type:DataTypes.STRING,
         nationality:DataTypes.STRING,
         name: DataTypes.STRING,

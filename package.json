@@ -4,13 +4,14 @@
   "description": "user product crud",
   "main": "src/app.js",
   "scripts": {
-    "test": "jest --detectOpenHandles",
+    "unitTest": "jest --detectOpenHandles",
+    "test": "cucumber-js --require-module @babel/register",
     "start": "./node_modules/.bin/nodemon --exec babel-node src/app.js",
     "serve": "./node_modules/.bin/node dist/app.js",
     "babel": "./node_modules/.bin/babel -D -d dist/ src"
   },
   "author": "Jose Veliz",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
@@ -19,6 +20,7 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "babel-jest": "^24.8.0",
+    "cucumber": "^5.1.0",
     "jest": "^24.8.0",
     "nodemon": "^1.17.3",
     "sequelize-mock": "^0.10.2",

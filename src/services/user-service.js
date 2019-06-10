@@ -8,6 +8,25 @@ class UserService {
       return data
     })
   }
+  login(req, res) {
+    let user = req.body
+    UserDao.findAll().then(data=>{
+      data.forEach(e => {
+        if (e.code === user.code && e.password === user.password){
+          res.status(200).json({data:{
+            isAuth:true,
+            token: 'abc123'
+          }})
+        } else {
+          res.status(200).json({data:{
+            isAuth:false,
+            token: null
+          }})
+        }
+      });
+      
+    })
+  }
   findById(req, res) {
     const id = req.params.id;
     return UserDao.findOne(id).then((data)=>{
