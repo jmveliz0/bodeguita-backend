@@ -2,6 +2,7 @@ const assert = require('assert');
 const { Given, When, Then } = require('cucumber');
 const request = require('supertest');
 import app from '../../src/app'
+// import mock from 'mockito'
 
 var userObj = {}
 
@@ -28,7 +29,6 @@ var userObj = {}
 //    ? And luego hago click en el boton de Entrar
 
         When('luego hago click en el boton de Entrar', async function () {
-          console.log('UO: ',userObj)
           let response = await request(app).post('/user/login').send(userObj)
           assert.equal(response.body.data.isAuth,true)
         });
