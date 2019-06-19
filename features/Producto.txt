@@ -9,10 +9,10 @@ Feature: Mantenimiento de Producto
 	And 	en campo Cantidad el valor de 20
 	And 	en campo Precio Unitario el valor de 0.5
 	And 	en campo Tipo el valor de "Golosinas"
-	And 	en campo Nacionalidad el valor de "Si"
-	And 	en campo Descuento el valor de "Si"
+	And 	en campo Nacionalidad el valor de "Peruana"
+	And 	en campo Descuento el valor de "true"
 	And 	presiono el boton de Guardar
-    Then 	el sistema me muestra el mensaje de: "Se guardo correctamente la Producto"
+    Then 	el sistema me muestra el mensaje de: "Se guardo de manera correcta el Producto"
     
   Scenario: Actualizar Producto
     Given   despues de iniciar sesion en la aplicacion
@@ -22,8 +22,8 @@ Feature: Mantenimiento de Producto
     And     en campo Cantidad el valor de 20
     And     en campo Precio Unitario el valor de 0.5
     And     en campo Tipo el valor de "Golosinas"
-    And     en campo Nacional el valor de "Si"
-    And     en campo Descuento el valor de "No"
+    And     en campo Nacionalidad el valor de "Extranjera"
+    And     en campo Descuento el valor de "false"
     And 	presiono el boton de Actualizar
     Then 	el sistema me muestra el mensaje de: "Se actualizo correctamente la Producto"
     

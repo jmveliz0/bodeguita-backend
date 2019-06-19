@@ -10,6 +10,9 @@ var userObj = {}
 
         Given('despues de ingresar a la web del sistema desde el navegador', function () {
           //mockear esta funcion
+          // MockitoAnnotations.initMocks(this);
+          // doNothing().when(response).sendRedirect("http://www.bode.com");
+          // Assert.assertTrue(true);
         });
        
 //    ? When escribo en campo Usuario el valor de "jalmacen"
@@ -35,6 +38,9 @@ var userObj = {}
        
 //    ? Then el sistema me direcciona a la pantalla de Bienvenida
 
-         Then('el sistema me direcciona a la pantalla de Bienvenida', function () {
-           //mock 
-         });
+        Then('el sistema me direcciona a la pantalla de Bienvenida', function () {
+          //mock
+          // MockitoAnnotations.initMocks(this);
+          // doNothing().when(response).sendRedirect("http://www.bode.com/bienvenida");
+          // Assert.assertTrue(true);
+        });
